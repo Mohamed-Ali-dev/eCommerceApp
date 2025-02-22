@@ -1,8 +1,9 @@
 using System;
 
-namespace Core.Entities;
-
-public class BaseEntity
+namespace Core.Entities
 {
-    public int Id { get; set; }
+    public class BaseEntity
+    {
+        public int Id { get; set; }
+    }
 }

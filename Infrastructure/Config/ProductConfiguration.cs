@@ -3,12 +3,13 @@ using Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Infrastructure.Config;
-
-public class ProductConfiguration : IEntityTypeConfiguration<Product>
+namespace Infrastructure.Config
 {
-    public void Configure(EntityTypeBuilder<Product> builder)
+    public class ProductConfiguration : IEntityTypeConfiguration<Product>
     {
-        builder.Property(x =>x.Price).HasColumnType("decimal(18.2)");
+        public void Configure(EntityTypeBuilder<Product> builder)
+        {
+            builder.Property(x =>x.Price).HasColumnType("decimal(18.2)");
+        }
     }
 }

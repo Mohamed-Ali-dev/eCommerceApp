@@ -3,16 +3,17 @@ using Core.Entities;
 using Infrastructure.Config;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.Data;
-
-public class StoreContext(DbContextOptions options) : DbContext(options)
+namespace Infrastructure.Data
 {
-    public DbSet<Product> Products { get; set; }
-
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    public class StoreContext(DbContextOptions options) : DbContext(options)
     {
-        base.OnModelCreating(modelBuilder);
+        public DbSet<Product> Products { get; set; }
 
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ProductConfiguration).Assembly);
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ProductConfiguration).Assembly);
+        }
     }
 }
