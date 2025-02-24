@@ -21,7 +21,7 @@ public class GenericRepository<T>(StoreContext context) : IGenericRepository<T> 
     {
         return await context.Set<T>().FindAsync(id);
     }
-
+    //Final step: Repository asynchronously executes the final composed query
     public async Task<T?> GetEntityWithSpec(ISpecification<T> spec)
     {
         return await ApplySpecification(spec).FirstOrDefaultAsync();
@@ -52,7 +52,9 @@ public class GenericRepository<T>(StoreContext context) : IGenericRepository<T> 
         context.Set<T>().Attach(entity);
         context.Entry(entity).State = EntityState.Modified;
     }
-
+    //Repository receives the specification
+    //Creates base IQueryable for Products(typically from DbContext)
+    //Passes query and spec to SpecificationEvaluator
     private IQueryable<T> ApplySpecification(ISpecification<T> spec){
         return SpecificationEvaluator<T>.GetQuery(context.Set<T>().AsQueryable(), spec);
     }
